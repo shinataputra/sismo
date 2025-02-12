@@ -50,7 +50,7 @@
         .action-button a {
             background-color: #4CAF50;
             color: white;
-            padding: 5px 10px;
+            padding: 2px 5px;
             text-decoration: none;
             border-radius: 4px;
             margin: 2px;
