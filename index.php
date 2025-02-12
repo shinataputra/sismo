@@ -46,6 +46,19 @@
         .add-button a:hover {
             background-color: #45a049;
         }
+
+        .action-button a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 2px;
+        }
+
+        .action-button a:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 
@@ -70,6 +83,7 @@
                 <th>Type Motor</th>
                 <th>Paket Service</th>
                 <th>Keluhan</th>
+                <th width='120'>Aksi</th>
             </tr>";
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
@@ -79,9 +93,10 @@
             echo "<td>" . $row["type_motor"] . "</td>";
             echo "<td>" . $row["paket_service"] . "</td>";
             echo "<td>" . $row["keluhan"] . "</td>";
-
-
-
+            echo "<td class='action-button'>
+                    <a href='editdata.php?id=" . $row["id_pendaftaran"] . "'>Edit</a>
+                    <a href='hapusdata.php?id=" . $row["id_pendaftaran"] . "'>Hapus</a>
+                </td>";
             echo "</tr>";
         }
         echo "</table>";
