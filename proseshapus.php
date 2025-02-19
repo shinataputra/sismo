@@ -1,23 +1,27 @@
 <?php
+include 'config.php';
 
-include 'koneksi.php';
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-$id = $_GET['id'];
+    // Hapus data di tabel pembayaran yang berhubungan dengan id_pendaftaran
+    $query_pembayaran = "DELETE FROM pembayaran WHERE id_pendaftaran = $id";
+    mysqli_query($conn, $query_pembayaran);
 
-// Query untuk mengambil data dari database
-$query = "SELECT * FROM pendaftaran WHERE id_pendaftaran = '$id'";
-$result = mysqli_query($conn, $query);
+    // Setelah menghapus data di tabel pembayaran, hapus data di tabel pendaftaran
+    $query_pendaftaran = "DELETE FROM pendaftaran WHERE id_pendaftaran = $id";
+    $result = mysqli_query($conn, $query_pendaftaran);
 
-if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $nama = $row["nama"];
-    $alamat = $row["alamat"];
-    $nopol = $row["nopol"];
-    $type_motor = $row["type_motor"];
-    $paket_service = $row["paket_service"];
-    $keluhan = $row["keluhan"];
+    if ($result) {
+        // Penghapusan berhasil, kembali ke halaman index.php
+        header("Location: index.php");
+    } else {
+        // Penghapusan gagal, tampilkan pesan error
+        echo "Error: " . mysqli_error($conn);
+    }
 } else {
-    echo "Tidak ada data pendaftaran.";
+    // Jika tidak ada ID yang diberikan, kembali ke halaman index.php
+    header("Location: index.php");
 }
 
 mysqli_close($conn);

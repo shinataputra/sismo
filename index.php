@@ -95,7 +95,7 @@
             echo "<td>" . $row["keluhan"] . "</td>";
             echo "<td class='action-button'>
                     <a href='editdata.php?id=" . $row["id_pendaftaran"] . "'>Edit</a>
-                    <a href='hapusdata.php?id=" . $row["id_pendaftaran"] . "'>Hapus</a>
+                    <a href='#' onclick='confirmDelete(" . $row["id_pendaftaran"] . ")'>Hapus</a>
                 </td>";
             echo "</tr>";
         }
@@ -105,7 +105,18 @@
     }
 
     mysqli_close($conn);
+
+
     ?>
+
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                window.location.href = `proseshapus.php?id=${id}`;
+            }
+        }
+    </script>
+
 </body>
 
 </html>
