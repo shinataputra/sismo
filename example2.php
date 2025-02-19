@@ -4,39 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Pendaftaran</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <h1>Data Pendaftaran</h1>
-    <?php
-    include 'config.php';
 
-    // Query untuk mengambil data dari database
-    $query = "SELECT * FROM pendaftaran";
-    $result = mysqli_query($conn, $query);
+    <a href='' onclick='confirmDelete()'>Hapus</a>
+    <a href='' onclick='tespopup()'>tespopup</a>
 
-    if (mysqli_num_rows($result) > 0) {
-        echo "<table border='1'>";
-        echo "<tr>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Paket Service</th>
-              </tr>";
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>" . $row["nama"] . "</td>";
-            echo "<td>" . $row["alamat"] . "</td>";
-            echo "<td>" . $row["paket_service"] . "</td>";
-            echo "</tr>";
+
+
+
+
+    <script>
+        function tespopup() {
+            if (confirm()) {
+
+            }
         }
-        echo "</table>";
-    } else {
-        echo "Tidak ada data pendaftaran.";
-    }
 
-    mysqli_close($conn);
-    ?>
+        function confirmDelete(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                window.location.href = `proseshapus.php?id=${id}`;
+            }
+        }
+    </script>
 </body>
 
 </html>
