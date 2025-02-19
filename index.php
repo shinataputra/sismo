@@ -115,6 +115,8 @@
                 window.location.href = `proseshapus.php?id=${id}`;
             }
         }
+
+        // tambah tampilan
     </script>
 
 </body>
