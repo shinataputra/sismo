@@ -7,8 +7,11 @@ $nopol = $_POST['nopol'];
 $type_motor = $_POST['type_motor'];
 $paket_service = $_POST['paket_service'];
 $keluhan = $_POST['keluhan'];
+$paket_service = $_POST['paket_service'];
+$harga_service = $_POST['harga_service'];
 
-$query = "INSERT INTO pendaftaran (nama, alamat, nopol, type_motor, paket_service, keluhan) VALUES ('$nama', '$alamat', '$nopol', '$type_motor', '$paket_service', '$keluhan')";
+$query = "INSERT INTO pendaftaran (nama, alamat, nopol, type_motor, paket_service, harga_service, keluhan) 
+          VALUES ('$nama', '$alamat', '$nopol', '$type_motor', '$paket_service', '$harga_service', '$keluhan')";
 
 if (mysqli_query($conn, $query)) {
     header("Location: index.php");

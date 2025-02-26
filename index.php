@@ -65,7 +65,7 @@
 <body>
     <h1>Data Pendaftaran</h1>
     <div class="add-button">
-        <a href="tambahdata.php">Tambah Data</a>
+        <a href="halamantambah.php">Tambah Data</a>
     </div>
     <?php
     include 'config.php';
@@ -94,8 +94,9 @@
             echo "<td>" . $row["paket_service"] . "</td>";
             echo "<td>" . $row["keluhan"] . "</td>";
             echo "<td class='action-button'>
-                    <a href='editdata.php?id=" . $row["id_pendaftaran"] . "'>Edit</a>
+                    <a href='halamanedit.php?id=" . $row["id_pendaftaran"] . "'>Edit</a>
                     <a href='#' onclick='confirmDelete(" . $row["id_pendaftaran"] . ")'>Hapus</a>
+                    <a href='prosesbayar.php?id=" . $row["id_pendaftaran"] . "'>Bayar</a>
                 </td>";
             echo "</tr>";
         }

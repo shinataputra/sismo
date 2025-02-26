@@ -16,6 +16,11 @@ CREATE TABLE pembayaran (
     id_pendaftaran INT,
     FOREIGN KEY (id_pendaftaran) REFERENCES pendaftaran(id_pendaftaran)
 );
+
+-- menambahkan kolom harga_service ke tabel pendaftaran
+-- ALTER TABLE pendaftaran
+-- ADD COLUMN harga_service DECIMAL(10, 2);
+
 -- Menambahkan data ke tabel pendaftaran
 INSERT INTO pendaftaran (nama, alamat, nopol, type_motor, paket_service, keluhan) VALUES
 ('Budi Santoso', 'Jl. Merdeka No. 1', 'AB 1234 CD', 'Honda Vario', 'Servis Berkala', 'Mesin berisik'),
