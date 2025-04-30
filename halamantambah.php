@@ -68,7 +68,7 @@
         document.getElementById('harga_service').value = hargaService;
     }
 
-    onchange = "updateHargaService()"
+    onchange = updateHargaService()
 </script>
 
 
