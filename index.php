@@ -14,7 +14,7 @@
         table,
         th,
         td {
-            border: 1px solid black;
+            border: 1px solid #AAA;
         }
 
         th,
@@ -60,6 +60,7 @@
             background-color: #45a049;
         }
     </style>
+    <link rel="stylesheet" href="core.css">
 </head>
 
 <body>
@@ -76,7 +77,7 @@
 
     if (mysqli_num_rows($result) > 0) {
         echo "<table>";
-        echo "<tr>
+        echo "<tr class='head'>
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Nopol</th>
@@ -93,7 +94,7 @@
             echo "<td>" . $row["type_motor"] . "</td>";
             echo "<td>" . $row["paket_service"] . "</td>";
             echo "<td>" . $row["keluhan"] . "</td>";
-            echo "<td class='action-button'>
+            echo "<td class='action-button action'>
                     <a href='halamanedit.php?id=" . $row["id_pendaftaran"] . "'>Edit</a>
                     <a href='#' onclick='confirmDelete(" . $row["id_pendaftaran"] . ")'>Hapus</a>
                     <a href='prosesbayar.php?id=" . $row["id_pendaftaran"] . "'>Bayar</a>

@@ -42,6 +42,7 @@ if (!$data) {
             margin-bottom: 10px;
         }
     </style>
+    <link rel="stylesheet" href="core.css">
 </head>
 
 <body>

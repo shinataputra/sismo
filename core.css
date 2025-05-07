@@ -1,0 +1,19 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    border-radius: 10px;
+}
+
+.action {
+    display: flex;
+}
+
+.action > a {
+    padding: 10px;
+}
+
+.head {
+    font-size: 20px;
+}
