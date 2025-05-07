@@ -7,11 +7,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $total_pembayaran = $_POST['total_pembayaran'];
     $tanggal_pembayaran = date('Y-m-d');
 
-    $query = "INSERT INTO pembayaran (id_pendaftaran, part_tambahan, total_pembayaran, tanggal_pembayaran) 
-              VALUES ('$id_pendaftaran', '$part_tambahan', '$total_pembayaran', '$tanggal_pembayaran')";
-    mysqli_query($conn, $query);
+    // Simpan data pembayaran ke tabel pembayaran
+    $query_pembayaran = "INSERT INTO pembayaran (id_pendaftaran, part_tambahan, total_pembayaran, tanggal_pembayaran) 
+                         VALUES ('$id_pendaftaran', '$part_tambahan', '$total_pembayaran', '$tanggal_pembayaran')";
+    mysqli_query($conn, $query_pembayaran);
 
+    // Ambil data dari tabel pendaftaran
+    $query_select = "SELECT * FROM pendaftaran WHERE id_pendaftaran = '$id_pendaftaran'";
+    $result_select = mysqli_query($conn, $query_select);
+    $data = mysqli_fetch_assoc($result_select);
+
+    if ($data) {
+        // Pindahkan data ke tabel riwayat_service
+        $query_riwayat = "INSERT INTO riwayat_service (nama, alamat, nopol, type_motor, paket_service, keluhan, total_pembayaran, tanggal_service)
+                          VALUES ('{$data['nama']}', '{$data['alamat']}', '{$data['nopol']}', '{$data['type_motor']}', '{$data['paket_service']}', '{$data['keluhan']}', '$total_pembayaran', NOW())";
+        mysqli_query($conn, $query_riwayat);
+
+        // Hapus data dari tabel pembayaran yang terkait dengan id_pendaftaran
+        $query_delete_pembayaran = "DELETE FROM pembayaran WHERE id_pendaftaran = '$id_pendaftaran'";
+        mysqli_query($conn, $query_delete_pembayaran);
+
+        // Hapus data dari tabel pendaftaran
+        $query_delete_pendaftaran = "DELETE FROM pendaftaran WHERE id_pendaftaran = '$id_pendaftaran'";
+        mysqli_query($conn, $query_delete_pendaftaran);
+    }
+
+    // Redirect ke halaman index setelah proses selesai
     header("Location: index.php");
+    exit();
 } else {
     $id_pendaftaran = $_GET['id'];
     $query = "SELECT * FROM pendaftaran WHERE id_pendaftaran = '$id_pendaftaran'";
