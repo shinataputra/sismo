@@ -1,75 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data Pendaftaran</title>
+    <title>Form Pendaftaran Servis Motor</title>
     <style>
-        form {
-            margin-left: 30px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
         }
 
-        label {
-            width: 100px;
-            display: block;
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        input {
-            margin-bottom: 10px;
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #555;
         }
     </style>
 </head>
 
 <body>
-    <h1>Tambah Data Pendaftaran</h1>
-    <form action="prosestambah.php" method="post">
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama" required>
+    <div class="container">
+        <h1>Formulir Pendaftaran Servis Motor</h1>
+        <form action="prosestambah.php" method="post">
+            <table>
+                <tr>
+                    <td><label for="nama">Nama</label></td>
+                    <td><input type="text" id="nama" name="nama" required></td>
+                </tr>
+                <tr>
+                    <td><label for="alamat">Alamat</label></td>
+                    <td><input type="text" id="alamat" name="alamat" required></td>
+                </tr>
+                <tr>
+                    <td><label for="nopol">No. Polisi</label></td>
+                    <td><input type="text" id="nopol" name="nopol" required></td>
+                </tr>
+                <tr>
+                    <td><label for="type_motor">Tipe Motor</label></td>
+                    <td><input type="text" id="type_motor" name="type_motor" required></td>
+                </tr>
+                <tr>
+                    <td><label for="paket_service">Paket Servis</label></td>
+                    <td>
+                        <select id="paket_service" name="paket_service" required onchange="updateHargaService()">
+                            <option value="">-- Pilih Paket --</option>
+                            <option value="service_ringan">Service Ringan - Rp75.000</option>
+                            <option value="service_berat">Service Berat - Rp150.000</option>
+                            <option value="ganti_oli">Ganti Oli - Rp50.000</option>
+                        </select>
+                        <p class="note">Harga akan disesuaikan otomatis</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="keluhan">Keluhan</label></td>
+                    <td><input type="text" id="keluhan" name="keluhan" required></td>
+                </tr>
+            </table>
 
-        <label for="alamat">Alamat:</label>
-        <input type="text" id="alamat" name="alamat" required>
+            <!-- Harga service disimpan secara tersembunyi -->
+            <input type="hidden" id="harga_service" name="harga_service" value="0">
 
-        <label for="nopol">Nopol:</label>
-        <input type="text" id="nopol" name="nopol" required>
+            <input type="submit" value="Daftar Servis">
+        </form>
+    </div>
 
-        <label for="type_motor">Type Motor:</label>
-        <input type="text" id="type_motor" name="type_motor" required>
+    <script>
+        function updateHargaService() {
+            var paket = document.getElementById('paket_service').value;
+            var harga = 0;
 
-        <label for="paket_service">Paket Service:</label>
-        <select id="paket_service" name="paket_service" required onchange="updateHargaService()">
-            <option value="service_ringan">Service Ringan - 75rb</option>
-            <option value="service_berat">Service Berat - 150rb</option>
-            <option value="ganti_oli">Ganti Oli - 50rb</option>
-        </select>
+            switch (paket) {
+                case 'service_ringan':
+                    harga = 75000;
+                    break;
+                case 'service_berat':
+                    harga = 150000;
+                    break;
+                case 'ganti_oli':
+                    harga = 50000;
+                    break;
+            }
 
-        <input type="hidden" id="harga_service" name="harga_service" value="0">
-
-        <label for="keluhan">Keluhan:</label>
-        <input type="text" id="keluhan" name="keluhan" required>
-
-        <input type="submit" value="Tambah Data">
-    </form>
-</body>
-
-<script>
-    function updateHargaService() {
-        var paketService = document.getElementById('paket_service').value;
-        var hargaService = 0;
-
-        if (paketService === 'service_ringan') {
-            hargaService = 75000;
-        } else if (paketService === 'service_berat') {
-            hargaService = 150000;
-        } else if (paketService === 'ganti_oli') {
-            hargaService = 50000;
+            document.getElementById('harga_service').value = harga;
         }
 
-        document.getElementById('harga_service').value = hargaService;
-    }
-
-    onchange = updateHargaService()
-</script>
-
+        // Set default saat halaman dibuka
+        window.onload = updateHargaService;
+    </script>
+</body>
 
 </html>
