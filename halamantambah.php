@@ -135,12 +135,4 @@
     </script>
 </body>
 
-<<<<<<< HEAD
-    onchange = updateHargaService()
-</script>
-
-l
 </html>
-=======
-</html>
->>>>>>> d429500636a7973d93901321880eb31425d95b61
